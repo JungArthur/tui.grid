@@ -35,7 +35,7 @@ const commonConfig = {
     },
   },
   output: {
-    library: ['tui', 'Grid'],
+    library: ['tui'],
     libraryTarget: 'umd',
     filename: package.name + (minify ? '.min' : '') + '.js',
     publicPath: '/dist',
@@ -110,7 +110,7 @@ module.exports = (env, { mode }) => {
   }
 
   // only add HtmlWebpackPlugin plugin when executing the test srcipt
-  const plugins = mode === 'development' ? [] : [new HtmlWebpackPlugin({ template: 'index.html' })];
+  const plugins = mode === 'development' ? [] : [new HtmlWebpackPlugin({ template: './src/index.html' })];
 
   return merge(commonConfig, {
     mode,

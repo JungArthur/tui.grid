@@ -55,6 +55,7 @@ export type GridEventName =
   | 'sort'
   | 'filter'
   | 'scrollEnd'
+  | 'scrollStart'
   | 'beforeRequest'
   | 'response'
   | 'successResponse'

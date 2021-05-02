@@ -113,7 +113,6 @@ class BodyAreaComp extends Component<Props> {
   private handleScroll = (ev: UIEvent) => {
     const { scrollLeft, scrollTop, scrollHeight, clientHeight } = ev.target as HTMLElement;
     const { dispatch, eventBus, side } = this.props;
-
     dispatch('setScrollTop', scrollTop);
     if (side === 'R') {
       dispatch('setScrollLeft', scrollLeft);
@@ -130,6 +129,15 @@ class BodyAreaComp extends Component<Props> {
          */
         eventBus.trigger('scrollEnd', gridEvent);
 
+        this.scrollToNextDebounced();
+      } else if (scrollTop === 0 && this.prevScrollLeft === scrollLeft) {
+        const gridEvent = new GridEvent();
+        /**
+         * Occurs when scroll at the bottommost
+         * @event Grid#scrollStart
+         * @property {Grid} instance - Current grid instance
+         */
+        eventBus.trigger('scrollStart', gridEvent);
         this.scrollToNextDebounced();
       }
       this.prevScrollLeft = scrollLeft;
